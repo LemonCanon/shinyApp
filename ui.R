@@ -2,7 +2,7 @@ library(shiny)
 library(leaflet)
 
 
-shinyUI(fluidPage(
+shinyUI(fluidPage(theme = "colorsliders.css", 
     fluidRow(
         column(12,
                h1("Significant Earthquakes, 2000-2016 Map")
@@ -18,7 +18,7 @@ shinyUI(fluidPage(
                leafletOutput("leaf")),
         column(4,
                p(strong("To start click the 'submit' button."),
-                 br("Each blue circle represents an earth quake. Use the sliders to select the years and magnitudes 
+                 br("Each represents an earth quake. Use the sliders to select the years and magnitudes 
                     shown, click submit to apply changes to the sliders. "),
                  br("Click a circle to display the exact date and magnitude of that quake."),
                  br("The dataset used is from the",
@@ -30,7 +30,7 @@ shinyUI(fluidPage(
         column(4,
                sliderInput("year_select", "Select Year Range", min = 2000, max = 2016, value = c(2000, 2016), sep = "")),
         column(4,
-               sliderInput("mag_select", "Select Magnitude Range", min = 0, max = 10, value = c(0, 10))
+               sliderInput("mag_select", "Select Magnitude Range", min = 5, max = 10, value = c(5, 10), step = 0.1)
                ),
         column(2,
                actionButton("button", "submit")

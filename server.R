@@ -20,14 +20,16 @@ shinyServer(function(input, output) {
                       in_mag_low & in_mag_high,]
     })
     
-    
+    pal <- colorNumeric(c("yellow","red"), earth$Magnitude)
     output$leaf <- renderLeaflet({
+        
         l <- leaflet(dataset()) %>% addTiles() %>% 
-            addCircleMarkers(stroke = FALSE, fillOpacity = 0.33, radius = 6,
+            addCircleMarkers(fillOpacity = 0.33, radius = 6,
                              popup =~ paste(sep = "</br>", Date, Type, 
                                             paste("magnitude:", Magnitude),
                                             paste("Latitude:", Latitude),
-                                            paste("Longitude:", Longitude)))
+                                            paste("Longitude:", Longitude)),
+                             color =~ pal(dataset()$Magnitude))
             
             
         print(l)

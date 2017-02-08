@@ -1,0 +1,35 @@
+---
+title: "Earthquakes 2000-2016"
+author: "Ryan"
+date: "February 6, 2017"
+output: ioslides_presentation
+---
+
+##Uses for the app
+This shiny app uses the [earthquake database](https://www.kaggle.com/usgs/earthquake-database) from kaggle.com to show where earthquakes occur. I limited the database to 2000-2016 to help it run a little smoother. The app can be used for the following:
+
+- Look in trends in earthquakes.
+- See the lines that quakes occur on.
+- Look at when quakes happen in specific places.
+ 
+
+##slide 3
+```{r, echo=FALSE, message=FALSE}
+library(magrittr)
+earth <- read.csv("database.csv")
+tmp <- as.Date(earth$Date, "%m/%d/%Y") %>% format("%Y") %>% as.numeric()
+earth$year <- tmp
+rm(tmp)
+earth <- earth[!is.na(earth$year) & !is.na(earth$Longitude) & !is.na(earth$Latitude),]
+earth <- earth[earth$year >= 2000,]
+```
+```{r}
+hist(earth$year, breaks = 16)
+```
+
+##slide 4
+```{r}
+hist(earth$Magnitude, breaks = 10)
+```
+
+##Future changes
