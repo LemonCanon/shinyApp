@@ -2,7 +2,7 @@ library(shiny)
 library(leaflet)
 
 
-shinyUI(fluidPage(theme = "colorsliders.css", 
+shinyUI(fluidPage( 
     fluidRow(
         column(12,
                h1("Significant Earthquakes, 2000-2016 Map")
@@ -18,8 +18,8 @@ shinyUI(fluidPage(theme = "colorsliders.css",
                leafletOutput("leaf")),
         column(4,
                p(strong("To start click the 'submit' button."),
-                 br("Each represents an earth quake. Use the sliders to select the years and magnitudes 
-                    shown, click submit to apply changes to the sliders. "),
+                 br("Each represents an earth quake, more red dots represent higher magnitude earthquakes. 
+                     Use the sliders to select the years and magnitudes shown, click submit to apply changes to the sliders."),
                  br("Click a circle to display the exact date and magnitude of that quake."),
                  br("The dataset used is from the",
                     HTML("<a href=https://www.kaggle.com/usgs/earthquake-database>earthquake database</a>"),

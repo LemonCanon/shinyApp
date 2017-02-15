@@ -8,6 +8,7 @@ earth$year <- tmp
 rm(tmp)
 earth <- earth[!is.na(earth$year) & !is.na(earth$Longitude) & !is.na(earth$Latitude),]
 earth <- earth[earth$year >= 2000,]
+earth <- earth[order(earth$Magnitude),]
 
 shinyServer(function(input, output) {
     
@@ -20,16 +21,16 @@ shinyServer(function(input, output) {
                       in_mag_low & in_mag_high,]
     })
     
-    pal <- colorNumeric(c("yellow","red"), earth$Magnitude)
+    pal <- reactive({colorNumeric(palette = c("yellow","red"), domain = c(min(dataset()$Magnitude), max(dataset()$Magnitude)))})
     output$leaf <- renderLeaflet({
         
         l <- leaflet(dataset()) %>% addTiles() %>% 
-            addCircleMarkers(fillOpacity = 0.33, radius = 6,
+            addCircleMarkers(fillOpacity = .75, radius = 6, stroke = FALSE,
                              popup =~ paste(sep = "</br>", Date, Type, 
                                             paste("magnitude:", Magnitude),
                                             paste("Latitude:", Latitude),
                                             paste("Longitude:", Longitude)),
-                             color =~ pal(dataset()$Magnitude))
+                             color =~ pal()(Magnitude))
             
             
         print(l)
