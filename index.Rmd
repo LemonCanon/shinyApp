@@ -13,7 +13,7 @@ This shiny app uses the [earthquake database](https://www.kaggle.com/usgs/earthq
 - Look at when quakes happen in specific places.
  
 
-##slide 3
+## Distribution of earthquakes 2000-2016
 ```{r, echo=FALSE, message=FALSE}
 library(magrittr)
 earth <- read.csv("database.csv")
@@ -27,9 +27,17 @@ earth <- earth[earth$year >= 2000,]
 hist(earth$year, breaks = 16)
 ```
 
-##slide 4
-```{r}
-hist(earth$Magnitude, breaks = 10)
-```
+##Goals
+The general goal of this app is to make it easy to explore the data by providing a consistant UI to interact with. It is easy to look at hotspots particularly in tearms of where high magnitude earthquakes appear. 
+
+The UI has been selected mostly for making those high magnitude earthquakes easy to see. Allowing the user to select the range of magnitudes they want to examine gives them a higher resolution in veiwing the data. 
+
+For that purpose the color scale adjusts to match the range of available points, red is always the highest and yellow is always the lowest.
 
 ##Future changes
+For the most part I am happy with the current state of the app, future versions might include access to more of the earthquakes dataset. I think there is opportunity to investigate the dataset but this app is mostly for the data exploration stage so for that I am very pleased with it. 
+Features I would concider adding:
+
+- Location filter so that it would be posible to focus in on a particular area of the map. 
+- Some visual indicator of year 
+- Download output so the user could download a .csv of the markers curently on the map.
